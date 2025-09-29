@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Technology - This year's most popular technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Custom CSS Variables untuk Skema Warna Biru Tua Teknologi */
+        :root {
+            --background: #0a192f; /* Biru sangat tua untuk background utama */
+            --foreground: #ffffff; /* Putih untuk teks utama */
+            --primary: #1e40af; /* Biru tua untuk elemen primer */
+            --secondary: #1e293b; /* Abu-abu gelap biru untuk sekunder */
+            --muted: #334155; /* Biru abu-abu untuk muted */
+            --accent: #3b82f6; /* Biru cerah untuk aksen dan highlight */
+            --destructive: #ef4444; /* Merah untuk destructive */
+            --border: #1e40af; /* Biru tua untuk border */
+            --blue-dark: #0f172a;
+            --text-muted: #94a3b8; /* Abu-abu biru untuk teks sekunder */
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+            --shadow-glow-hover: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background) 0%, var(--secondary) 100%);
+            color: var(--foreground);
+            line-height: 1.7;
+        }
+
+        /* Header Navigation */
+        header {
+            background-color: var(--blue-dark);
+            border-bottom: 1px solid var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 50%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--foreground);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header (seperti Hero untuk About) */
+        .page-header {
+            background-color: var(--secondary);
+            background-image: 
+                radial-gradient(var(--accent) 1px, transparent 1px),
+                radial-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 40px 40px, 20px 20px;
+            background-position: 0 0, 20px 20px;
+            padding: 4rem 1rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .page-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 50%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (min-width: 768px) {
+            .page-title {
+                font-size: 4rem;
+            }
+        }
+
+        .page-description {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 48rem;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 4rem 1rem;
+            background-color: var(--blue-dark);
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-prose {
+            max-width: none;
+            color: var(--foreground);
+        }
+
+        .content-prose h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+            color: var(--foreground);
+            background: linear-gradient(135deg, var(--accent) 0%, #60a5fa 50%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-prose h2:first-child {
+            margin-top: 0;
+        }
+
+        .content-prose h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            color: var(--accent);
+        }
+
+        .content-prose p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .content-prose ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-prose ul li {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .content-prose ul li:hover {
+            background: rgba(59, 130, 246, 0.2);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .content-prose blockquote {
+            background: linear-gradient(145deg, var(--secondary) 0%, var(--blue-dark) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+            opacity: 0.9;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, var(--secondary) 0%, var(--blue-dark) 100%);
+            border: 1px solid var(--primary);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .info-box:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .info-box h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box p {
+            color: var(--text-muted);
+        }
+
+        /* CTA Section di Akhir */
+        .cta-section {
+            padding: 4rem 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .cta-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            color: white;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 32rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-glow);
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, var(--background) 0%, var(--primary) 100%);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+            border-top: 1px solid rgba(30, 64, 175, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(30, 64, 175, 0.3);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .page-header {
+                background-size: 30px 30px, 15px 15px;
+                padding: 3rem 1rem;
+            }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .content-section,
+            .cta-section {
+                padding: 3rem 1rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">CER1TARYA</a>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+                <a href="about.html" class="active">ABOUT AI</a>
+            </div>
+            <div class="hamburger">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="page-content">
+            <h1 class="page-title">
+                Understanding <span class="text-accent">Artificial Intelligence</span>
+            </h1>
+            <p class="page-description">
+                Revolutionary technology that changes the way machines learn, think, and interact with the world through simulations of human intelligence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="content-wrapper">
+            <div class="content-prose">
+                <h2>What is Artificial Intelligence?</h2>
+                <p>
+                    Artificial Intelligence (AI) is a field of computer science that focuses on creating intelligent systems that can perform tasks that normally require human intelligence. This includes capabilities such as learning, pattern recognition, decision making, and problem solving. AI not only mimics human behavior, but can also exceed human capabilities in specific tasks.
+                </p>
+                <p>
+                    With advanced algorithms and big data, AI has become the foundation for modern innovation, from virtual assistants to autonomous systems. Its impact is widespread, from improving business efficiency to revolutionizing the medical and entertainment fields.
+                </p>
+                <h2>Types of Artificial Intelligence</h2>
+                
+                <div class="info-box">
+                    <h3>1. AI Lemah (Narrow AI)</h3>
+                    <p>
+                        AI designed to perform specific and limited tasks, such as voice recognition in Siri or movie recommendations on Netflix. This is the most common form of AI today and is highly effective in certain domains.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>2. AI Umum (General AI)</h3>
+                    <p>
+                        AI that can understand, learn, and apply knowledge in various tasks like humans. Although still in the development stage, this will revolutionize the way we interact with technology.
+                    </p>
+                </div>
+
+                <div class="info-box">
+                    <h3>3. AI Super (Super AI)</h3>
+                    <p>
+                        AI that surpasses human intelligence in all areas, including creativity and emotion. This is a vision of the future that raises ethical questions about control and social impact.
+                    </p>
+                </div>
+
+                <ul>
+                    <li><strong>Machine Learning:</strong> A subset of AI in which the system learns from data without explicit programming, such as weather prediction or fraud detection.</li>
+                    <li><strong>Computer Vision:</strong> Interpret and understand visual information from the world, similar to how humans see and understand their environment.</li>
+                    <li><strong>Natural Language Processing (NLP):</strong> Enabling AI to understand and generate human language, such as chatbots and automatic translators.</li>
+                </ul>
+
+                <h2>A Brief History of AI Development</h2>
+                <p>
+                    The concept of AI first emerged in the 1950s through Alan Turing and the 1956 Dartmouth Conference, which defined AI as a science. In the 1960s and 1970s, programs such as ELIZA created simple conversations. An “AI Winter” occurred due to computational limitations, but it revived in the 2010s thanks to big data, GPUs, and algorithms such as neural networks. Currently, AI such as GPT and DALL-E mark an era of transformation.
+                </p>
+                <blockquote>
+                    "Mesin akan mampu melakukan apa pun yang bisa dilakukan pikiran manusia." – Alan Turing, Bapak Ilmu Komputer Modern.
+                </blockquote>
+
+                <h2>AI Applications in Everyday Life</h2>
+                <p>
+                    AI has permeated various sectors. In healthcare, AI detects cancer more accurately than human doctors. In transportation, autonomous systems such as Tesla reduce accidents. In entertainment, Netflix's recommendation algorithm keeps users engaged. In addition, AI assists in education through virtual tutors and in the environment through climate monitoring.
+                </p>
+
+                <h2>The Future and Challenges of AI</h2>
+                <p>
+                    It is estimated that by 2030, AI will reach general intelligence, enabling deeper human-machine collaboration. However, challenges such as algorithmic bias, job losses, data privacy, and existential risks require global regulation. AI ethics is key to ensuring that this technology benefits humanity as a whole.
